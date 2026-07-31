@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #F4E9DA; color: #2E2419; -webkit-font-smoothing: antialiased; }
+  a { color: #7A5A3C; text-decoration: none; }
+  a:hover { color: #6E7A4F; }
+  ::selection { background: #D8C4A0; }
+  @keyframes ne-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+  @keyframes ne-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes ne-cue { 0% { transform: translateY(0); opacity: .25; } 50% { transform: translateY(10px); opacity: .8; } 100% { transform: translateY(0); opacity: .25; } }
+  @keyframes ne-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+</style>
+</helmet>
+<div dir="{{ dir }}" style="position: relative; min-height: 100vh; background: #F4E9DA; font-family: Inter, system-ui, sans-serif; overflow-x: hidden;">
+
+  <div style="position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: 0.42; mix-blend-mode: multiply; background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E&quot;);"></div>
+
+  <div style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 22px clamp(20px, 5vw, 64px); backdrop-filter: blur(2px);">
+    <div style="display: flex; align-items: center; gap: 9px; font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: #7A5A3C;">
+      <img src="uploads/cec-logo.png" alt="CEC — Construction Excellence Center" style="display: block; height: 22px; width: auto;" />
+      <span>CEC</span>
+    </div>
+    <button type="button" onClick="{{ toggleLang }}" style="font-family: Inter, sans-serif; background: transparent; border: 1px solid rgba(122,90,60,0.4); border-radius: 0; padding: 7px 14px; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #7A5A3C; cursor: pointer; transition: background 400ms ease, color 400ms ease;" style-hover="background: rgba(122,90,60,0.08); color: #2E2419;">{{ langLabel }}</button>
+  </div>
+
+  <section data-screen-label="Hero" style="position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px clamp(20px, 6vw, 80px) 80px; background: linear-gradient(180deg, #ECDEC6 0%, #F4E9DA 62%, #F4E9DA 100%); text-align: center;">
+    <div style="animation: ne-fade 2200ms ease both;">
+      <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}">
+        <p style="margin: 0 0 clamp(26px, 4vw, 44px); font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(122,90,60,0.85);">Buraydah &middot; Al-Qassim</p>
+      </sc-if>
+      <sc-if value="{{ ar }}">
+        <p style="margin: 0 0 clamp(26px, 4vw, 44px); font-family: 'Noto Naskh Arabic', serif; font-size: 12px; letter-spacing: 0.2em; color: rgba(122,90,60,0.85);">بريدة &middot; القصيم</p>
+      </sc-if>
+    </div>
+    <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}">
+      <h1 style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; font-size: clamp(44px, 8.5vw, 132px); line-height: 1.02; letter-spacing: -0.01em; color: #2E2419; animation: ne-rise 2400ms cubic-bezier(0.16,1,0.3,1) both;">North Ablaq Estate</h1>
+    </sc-if>
+    <sc-if value="{{ ar }}">
+      <h1 style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-weight: 400; font-size: clamp(38px, 7vw, 104px); line-height: 1.2; color: #2E2419; animation: ne-rise 2400ms cubic-bezier(0.16,1,0.3,1) both;">ضيعة الأبلق الشمالية</h1>
+    </sc-if>
+    <div style="width: min(420px, 70vw); height: 1px; background: rgba(122,90,60,0.55); margin: clamp(28px, 4vw, 48px) 0; transform-origin: center; animation: ne-draw 2600ms 600ms cubic-bezier(0.16,1,0.3,1) both;"></div>
+    <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}">
+      <p style="margin: 0; max-width: 44ch; font-weight: 300; font-size: clamp(13px, 1.35vw, 16px); line-height: 1.9; color: rgba(46,36,25,0.72); animation: ne-rise 2400ms 900ms cubic-bezier(0.16,1,0.3,1) both;">A private estate across 57,907 m&sup2; &mdash; Buraydah, Al-Qassim</p>
+    </sc-if>
+    <sc-if value="{{ ar }}">
+      <p style="margin: 0; max-width: 44ch; font-family: 'Noto Naskh Arabic', serif; font-size: clamp(14px, 1.4vw, 17px); line-height: 2.1; color: rgba(46,36,25,0.72); animation: ne-rise 2400ms 900ms cubic-bezier(0.16,1,0.3,1) both;">ضيعة خاصة على مساحة ٥٧٫٩٠٧ م&sup2; &mdash; بريدة، القصيم</p>
+    </sc-if>
+    <div style="position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 12px;">
+      <span style="font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(122,90,60,0.7);">{{ scrollCue }}</span>
+      <span style="display: block; width: 1px; height: 40px; background: linear-gradient(180deg, rgba(122,90,60,0.6), rgba(122,90,60,0)); animation: ne-cue 3400ms ease-in-out infinite;"></span>
+    </div>
+  </section>
+
+  <section data-screen-label="Story" data-seq-stage="1" style="position: relative; height: 420vh; background: #F4E9DA;">
+    <div data-seq-pin="1" style="position: absolute; top: 0; left: 0; right: 0; height: 100vh; overflow: hidden; background: #F4E9DA; box-sizing: border-box;">
+      <div style="position: absolute; inset: 0; padding: clamp(64px, 9vh, 100px) clamp(20px, 6vw, 100px) clamp(64px, 10vh, 120px); box-sizing: border-box;">
+        <img data-seq-img="0" src="uploads/Main-89cc7624.png" alt="Dimensioned site plan — 57,907 m² parcel" style="position: absolute; inset: clamp(64px, 9vh, 100px) clamp(20px, 6vw, 100px) clamp(64px, 10vh, 120px); width: calc(100% - clamp(40px, 12vw, 200px)); height: calc(100% - clamp(128px, 19vh, 220px)); object-fit: contain; opacity: 0; will-change: opacity;" />
+        <img data-seq-img="1" src="uploads/magnific_recolor-the-image-in-img1_xSLZb61jfW-d0f5439c.jpeg" alt="Labeled concept diagram — mosque, majlis, main villa, chalets, lake, stable, track, farm plots, greenhouses, workers housing" style="position: absolute; inset: clamp(64px, 9vh, 100px) clamp(20px, 6vw, 100px) clamp(64px, 10vh, 120px); width: calc(100% - clamp(40px, 12vw, 200px)); height: calc(100% - clamp(128px, 19vh, 220px)); object-fit: contain; opacity: 0; will-change: opacity;" />
+        <img data-seq-img="2" src="uploads/magnific_dtBKz16XSL-b46198b4.jpeg" alt="Top-down render of the estate masterplan" style="position: absolute; inset: clamp(64px, 9vh, 100px) clamp(20px, 6vw, 100px) clamp(64px, 10vh, 120px); width: calc(100% - clamp(40px, 12vw, 200px)); height: calc(100% - clamp(128px, 19vh, 220px)); object-fit: contain; opacity: 0; will-change: opacity;" />
+        <img data-seq-img="3" src="uploads/magnific_place-the-estate-masterpl_KL165Wakqp-a25f2665.jpeg" alt="Cinematic aerial view of the estate in the desert" style="position: absolute; inset: clamp(64px, 9vh, 100px) clamp(20px, 6vw, 100px) clamp(64px, 10vh, 120px); width: calc(100% - clamp(40px, 12vw, 200px)); height: calc(100% - clamp(128px, 19vh, 220px)); object-fit: contain; opacity: 0; will-change: opacity;" />
+      </div>
+      <div style="position: absolute; left: clamp(20px, 6vw, 64px); right: clamp(20px, 6vw, 64px); top: clamp(28px, 5vh, 56px); display: flex; gap: 8px;">
+        <span data-seq-dot="0" style="flex: 1; height: 1px; background: rgba(122,90,60,0.28); position: relative; overflow: hidden;"><span data-seq-fill="0" style="position: absolute; inset: 0; background: #7A5A3C; transform: scaleX(0); transform-origin: left; transition: transform 80ms linear;"></span></span>
+        <span data-seq-dot="1" style="flex: 1; height: 1px; background: rgba(122,90,60,0.28); position: relative; overflow: hidden;"><span data-seq-fill="1" style="position: absolute; inset: 0; background: #7A5A3C; transform: scaleX(0); transform-origin: left; transition: transform 80ms linear;"></span></span>
+        <span data-seq-dot="2" style="flex: 1; height: 1px; background: rgba(122,90,60,0.28); position: relative; overflow: hidden;"><span data-seq-fill="2" style="position: absolute; inset: 0; background: #7A5A3C; transform: scaleX(0); transform-origin: left; transition: transform 80ms linear;"></span></span>
+        <span data-seq-dot="3" style="flex: 1; height: 1px; background: rgba(122,90,60,0.28); position: relative; overflow: hidden;"><span data-seq-fill="3" style="position: absolute; inset: 0; background: #7A5A3C; transform: scaleX(0); transform-origin: left; transition: transform 80ms linear;"></span></span>
+      </div>
+      <div data-seq-cap="0" style="position: absolute; left: clamp(20px, 6vw, 64px); bottom: clamp(24px, 5vh, 52px); max-width: 460px; opacity: 0; will-change: opacity, transform;">
+        <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}"><p style="margin: 0; font-size: 9px; letter-spacing: 0.34em; text-transform: uppercase; color: #7A5A3C;">01 &middot; The Site</p><p style="margin: 12px 0 0; font-weight: 300; font-size: 13px; line-height: 1.85; color: rgba(46,36,25,0.7);">57,907 m&sup2;, surveyed and fenced &mdash; 200 m western frontage on a 20 m road, Buraydah, Al-Qassim.</p></sc-if>
+        <sc-if value="{{ ar }}"><p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; color: #7A5A3C;">٠١ &middot; الموقع</p><p style="margin: 12px 0 0; font-family: 'Noto Naskh Arabic', serif; font-size: 14px; line-height: 2; color: rgba(46,36,25,0.7);">٥٧٬٩٠٧ م&sup2;، مُساحة ومسوّرة &mdash; واجهة غربية ٢٠٠ م على طريق بعرض ٢٠ م، بريدة، القصيم.</p></sc-if>
+      </div>
+      <div data-seq-cap="1" style="position: absolute; left: clamp(20px, 6vw, 64px); bottom: clamp(24px, 5vh, 52px); max-width: 460px; opacity: 0; will-change: opacity, transform;">
+        <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}"><p style="margin: 0; font-size: 9px; letter-spacing: 0.34em; text-transform: uppercase; color: #7A5A3C;">02 &middot; Concept</p><p style="margin: 12px 0 0; font-weight: 300; font-size: 13px; line-height: 1.85; color: rgba(46,36,25,0.7);">Mosque and majlis at the public edge; villa and chalets around the lake; stable, track, farm and workers&rsquo; ground held to the service side.</p></sc-if>
+        <sc-if value="{{ ar }}"><p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; color: #7A5A3C;">٠٢ &middot; الفكرة</p><p style="margin: 12px 0 0; font-family: 'Noto Naskh Arabic', serif; font-size: 14px; line-height: 2; color: rgba(46,36,25,0.7);">المسجد والمجلس عند الحافة العامة؛ الفيلا والشاليهات حول البحيرة؛ الإسطبل والميدان والمزرعة وسكن العمال في جهة الخدمة.</p></sc-if>
+      </div>
+      <div data-seq-cap="2" style="position: absolute; left: clamp(20px, 6vw, 64px); bottom: clamp(24px, 5vh, 52px); max-width: 460px; opacity: 0; will-change: opacity, transform;">
+        <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}"><p style="margin: 0; font-size: 9px; letter-spacing: 0.34em; text-transform: uppercase; color: #7A5A3C;">03 &middot; Masterplan</p><p style="margin: 12px 0 0; font-weight: 300; font-size: 13px; line-height: 1.85; color: rgba(46,36,25,0.7);">Villa, guest wing and service court gathered around a single winding lagoon.</p></sc-if>
+        <sc-if value="{{ ar }}"><p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; color: #7A5A3C;">٠٣ &middot; المخطّط العام</p><p style="margin: 12px 0 0; font-family: 'Noto Naskh Arabic', serif; font-size: 14px; line-height: 2; color: rgba(46,36,25,0.7);">فيلا وجناح ضيوف وفناء خدمة تجتمع حول بحيرة واحدة متعرّجة.</p></sc-if>
+      </div>
+      <div data-seq-cap="3" style="position: absolute; left: clamp(20px, 6vw, 64px); bottom: clamp(24px, 5vh, 52px); max-width: 460px; opacity: 0; will-change: opacity, transform;">
+        <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}"><p style="margin: 0; font-size: 9px; letter-spacing: 0.34em; text-transform: uppercase; color: #7A5A3C;">04 &middot; Aerial View</p><p style="margin: 12px 0 0; font-weight: 300; font-size: 13px; line-height: 1.85; color: rgba(46,36,25,0.7);">The estate assembled, walled, and standing quietly in the open desert.</p></sc-if>
+        <sc-if value="{{ ar }}"><p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; color: #7A5A3C;">٠٤ &middot; منظر جوّي</p><p style="margin: 12px 0 0; font-family: 'Noto Naskh Arabic', serif; font-size: 14px; line-height: 2; color: rgba(46,36,25,0.7);">الضيعة مكتملة ومسوّرة، تقف بهدوء في الصحراء المفتوحة.</p></sc-if>
+      </div>
+      <div style="position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, #F4E9DA 0%, rgba(244,233,218,0.9) 5vh, rgba(244,233,218,0) 12vh);"></div>
+    </div>
+  </section>
+
+  <section data-screen-label="Design Language" style="padding: clamp(90px, 13vh, 160px) clamp(20px, 6vw, 80px); background: #EEE1CC;">
+    <div style="max-width: 1180px; margin: 0 auto;">
+      <div data-reveal="1" style="margin-bottom: clamp(44px, 6vw, 76px);">
+        <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}"><p style="margin: 0; font-size: 10px; letter-spacing: 0.34em; text-transform: uppercase; color: #7A5A3C;">Design Language</p></sc-if>
+        <sc-if value="{{ ar }}"><p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; letter-spacing: 0.16em; color: #7A5A3C;">اللغة المعمارية</p></sc-if>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(32px, 4vw, 56px);">
+        <div data-reveal="2" style="padding-top: 22px; border-top: 1px solid rgba(122,90,60,0.35);">
+          <span style="display: block; width: 34px; height: 10px; margin-bottom: 22px; background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='10'%3E%3Cpath d='M0 9.5 L5.5 1 L11 9.5 L16.5 1 L22 9.5 L27.5 1 L33 9.5' fill='none' stroke='%237A5A3C' stroke-width='0.9'/%3E%3C/svg%3E&quot;);"></span>
+          <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}">
+            <h3 style="margin: 0 0 12px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: clamp(20px, 2.1vw, 27px); line-height: 1.25; color: #2E2419;">Serrated stepped parapets</h3>
+            <p style="margin: 0; font-weight: 300; font-size: 13px; line-height: 1.85; color: rgba(46,36,25,0.7);">A fine triangular crown that reads as shadow at noon.</p>
+          </sc-if>
+          <sc-if value="{{ ar }}">
+            <h3 style="margin: 0 0 12px; font-family: 'Noto Naskh Arabic', serif; font-weight: 500; font-size: clamp(18px, 2vw, 24px); line-height: 1.6; color: #2E2419;">شرفات مسنّنة متدرّجة</h3>
+            <p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 14px; line-height: 2; color: rgba(46,36,25,0.7);">تاج مثلّثي رقيق يتحوّل إلى ظلّ في منتصف النهار.</p>
+          </sc-if>
+        </div>
+        <div data-reveal="3" style="padding-top: 22px; border-top: 1px solid rgba(122,90,60,0.35);">
+          <span style="display: block; width: 34px; height: 14px; margin-bottom: 18px; background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='14'%3E%3Crect x='0.5' y='0.5' width='33' height='13' fill='none' stroke='%237A5A3C' stroke-width='0.9'/%3E%3Crect x='12.5' y='5.5' width='9' height='8' fill='none' stroke='%237A5A3C' stroke-width='0.9'/%3E%3C/svg%3E&quot;);"></span>
+          <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}">
+            <h3 style="margin: 0 0 12px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: clamp(20px, 2.1vw, 27px); line-height: 1.25; color: #2E2419;">Monumental gateway</h3>
+            <p style="margin: 0; font-weight: 300; font-size: 13px; line-height: 1.85; color: rgba(46,36,25,0.7);">One deep threshold sets the scale of the whole estate.</p>
+          </sc-if>
+          <sc-if value="{{ ar }}">
+            <h3 style="margin: 0 0 12px; font-family: 'Noto Naskh Arabic', serif; font-weight: 500; font-size: clamp(18px, 2vw, 24px); line-height: 1.6; color: #2E2419;">بوّابة ضخمة</h3>
+            <p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 14px; line-height: 2; color: rgba(46,36,25,0.7);">عتبة واحدة عميقة تُحدّد مقياس الضيعة بأكملها.</p>
+          </sc-if>
+        </div>
+        <div data-reveal="4" style="padding-top: 22px; border-top: 1px solid rgba(122,90,60,0.35);">
+          <span style="display: block; width: 34px; height: 14px; margin-bottom: 18px; background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='14'%3E%3Cpath d='M0 3.5 H34 M0 10.5 H34' stroke='%237A5A3C' stroke-width='0.9'/%3E%3C/svg%3E&quot;);"></span>
+          <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}">
+            <h3 style="margin: 0 0 12px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: clamp(20px, 2.1vw, 27px); line-height: 1.25; color: #2E2419;">Earthen stucco &amp; white trim</h3>
+            <p style="margin: 0; font-weight: 300; font-size: 13px; line-height: 1.85; color: rgba(46,36,25,0.7);">Warm clay walls, edged in lime white &mdash; ablaq, restated.</p>
+          </sc-if>
+          <sc-if value="{{ ar }}">
+            <h3 style="margin: 0 0 12px; font-family: 'Noto Naskh Arabic', serif; font-weight: 500; font-size: clamp(18px, 2vw, 24px); line-height: 1.6; color: #2E2419;">طين مُلبّس وحواشٍ بيضاء</h3>
+            <p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 14px; line-height: 2; color: rgba(46,36,25,0.7);">جدران طينية دافئة بحواشٍ من الجيرالأبيض &mdash; الأبلق بصياغة جديدة.</p>
+          </sc-if>
+        </div>
+        <div data-reveal="5" style="padding-top: 22px; border-top: 1px solid rgba(122,90,60,0.35);">
+          <span style="display: block; width: 34px; height: 12px; margin-bottom: 20px; background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='12'%3E%3Cpath d='M5 11 L9 3 L13 11 Z M17 11 L21 3 L25 11 Z' fill='none' stroke='%237A5A3C' stroke-width='0.9'/%3E%3C/svg%3E&quot;);"></span>
+          <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}">
+            <h3 style="margin: 0 0 12px; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: clamp(20px, 2.1vw, 27px); line-height: 1.25; color: #2E2419;">Triangular incised openings</h3>
+            <p style="margin: 0; font-weight: 300; font-size: 13px; line-height: 1.85; color: rgba(46,36,25,0.7);">Light enters as small, deliberate cuts in thick wall.</p>
+          </sc-if>
+          <sc-if value="{{ ar }}">
+            <h3 style="margin: 0 0 12px; font-family: 'Noto Naskh Arabic', serif; font-weight: 500; font-size: clamp(18px, 2vw, 24px); line-height: 1.6; color: #2E2419;">فتحات مثلّثة محفورة</h3>
+            <p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 14px; line-height: 2; color: rgba(46,36,25,0.7);">يدخل الضوء عبر شقوق صغيرة مقصودة في الجدار السميك.</p>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Masterplan" style="padding: clamp(100px, 15vh, 180px) clamp(20px, 6vw, 80px); background: #F4E9DA;">
+    <div style="max-width: 1180px; margin: 0 auto;">
+      <div data-reveal="1" style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 18px; margin-bottom: clamp(36px, 5vw, 60px);">
+        <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}">
+          <p style="margin: 0; font-size: 10px; letter-spacing: 0.34em; text-transform: uppercase; color: #7A5A3C;">Masterplan &amp; Components</p>
+        </sc-if>
+        <sc-if value="{{ ar }}">
+          <p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; letter-spacing: 0.16em; color: #7A5A3C;">المخطّط العام والمكوّنات</p>
+        </sc-if>
+        <p style="margin: 0; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(46,36,25,0.45);">{{ gradientNote }}</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: rgba(122,90,60,0.28); border: 1px solid rgba(122,90,60,0.28);">
+        <div data-reveal="3" style="background: #F4E9DA; padding: 0; transition: background 700ms ease;" style-hover="background: #EEE1CC;">
+          <div style="overflow: hidden; border-bottom: 1px solid rgba(122,90,60,0.22);">
+            <img src="uploads/mp-mosque.jpg" alt="Mosque and gateway" style="display: block; width: 100%; height: 148px; object-fit: cover;" />
+          </div>
+          <div style="padding: 20px 20px 26px;">
+            <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}">
+              <p style="margin: 0 0 8px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 21px; color: #2E2419;">Mosque &amp; Gateway</p>
+              <p style="margin: 0; font-weight: 300; font-size: 12px; line-height: 1.8; color: rgba(46,36,25,0.65);">The public face: minaret, arrival court, one deep arch.</p>
+            </sc-if>
+            <sc-if value="{{ ar }}">
+              <p style="margin: 0 0 8px; font-family: 'Noto Naskh Arabic', serif; font-size: 19px; color: #2E2419;">المسجد والبوّابة</p>
+              <p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 13px; line-height: 1.95; color: rgba(46,36,25,0.65);">الواجهة العامة: مئذنة وساحة وصول وقوس عميق واحد.</p>
+            </sc-if>
+          </div>
+        </div>
+        <div data-reveal="4" style="background: #F4E9DA; transition: background 700ms ease;" style-hover="background: #EEE1CC;">
+          <div style="overflow: hidden; border-bottom: 1px solid rgba(122,90,60,0.22);">
+            <img src="uploads/mp-villa.jpg" alt="Main villa" style="display: block; width: 100%; height: 148px; object-fit: cover;" />
+          </div>
+          <div style="padding: 20px 20px 26px;">
+            <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}">
+              <p style="margin: 0 0 8px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 21px; color: #2E2419;">Villa</p>
+              <p style="margin: 0; font-weight: 300; font-size: 12px; line-height: 1.8; color: rgba(46,36,25,0.65);">The private centre, held behind its own courtyard wall.</p>
+            </sc-if>
+            <sc-if value="{{ ar }}">
+              <p style="margin: 0 0 8px; font-family: 'Noto Naskh Arabic', serif; font-size: 19px; color: #2E2419;">الفيلا</p>
+              <p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 13px; line-height: 1.95; color: rgba(46,36,25,0.65);">المركز الخاص، محجوب خلف جدار فنائه الخاص.</p>
+            </sc-if>
+          </div>
+        </div>
+        <div data-reveal="5" style="background: #F4E9DA; transition: background 700ms ease;" style-hover="background: #EEE1CC;">
+          <div style="overflow: hidden; border-bottom: 1px solid rgba(122,90,60,0.22); background: #D8C4A0;">
+            <img src="uploads/mp-chalet.jpg" alt="Chalet and majlis" style="display: block; width: 100%; height: 148px; object-fit: cover;" />
+          </div>
+          <div style="padding: 20px 20px 26px;">
+            <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}">
+              <p style="margin: 0 0 8px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 21px; color: #2E2419;">Chalet &amp; Majlis</p>
+              <p style="margin: 0; font-weight: 300; font-size: 12px; line-height: 1.8; color: rgba(46,36,25,0.65);">Guest ground &mdash; reception without entering the house.</p>
+            </sc-if>
+            <sc-if value="{{ ar }}">
+              <p style="margin: 0 0 8px; font-family: 'Noto Naskh Arabic', serif; font-size: 19px; color: #2E2419;">الشاليه والمجلس</p>
+              <p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 13px; line-height: 1.95; color: rgba(46,36,25,0.65);">أرض الضيافة &mdash; استقبال دون الدخول إلى البيت.</p>
+            </sc-if>
+          </div>
+        </div>
+        <div data-reveal="6" style="background: #F4E9DA; transition: background 700ms ease;" style-hover="background: #EEE1CC;">
+          <div style="overflow: hidden; border-bottom: 1px solid rgba(122,90,60,0.22);">
+            <img src="uploads/mp-stable.jpg" alt="Stable and paddock" style="display: block; width: 100%; height: 148px; object-fit: cover;" />
+          </div>
+          <div style="padding: 20px 20px 26px;">
+            <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}">
+              <p style="margin: 0 0 8px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 21px; color: #2E2419;">Stable &amp; Paddock</p>
+              <p style="margin: 0; font-weight: 300; font-size: 12px; line-height: 1.8; color: rgba(46,36,25,0.65);">Eastern edge: shaded rows opening onto sand.</p>
+            </sc-if>
+            <sc-if value="{{ ar }}">
+              <p style="margin: 0 0 8px; font-family: 'Noto Naskh Arabic', serif; font-size: 19px; color: #2E2419;">الإسطبل والميدان</p>
+              <p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 13px; line-height: 1.95; color: rgba(46,36,25,0.65);">الحدّ الشرقي: صفوف مظلّلة تنفتح على الرمل.</p>
+            </sc-if>
+          </div>
+        </div>
+        <div data-reveal="7" style="background: #F4E9DA; transition: background 700ms ease;" style-hover="background: #EEE1CC;">
+          <div style="overflow: hidden; border-bottom: 1px solid rgba(122,90,60,0.22);">
+            <img src="uploads/mp-lagoon.jpg" alt="Lagoon and courts" style="display: block; width: 100%; height: 148px; object-fit: cover;" />
+          </div>
+          <div style="padding: 20px 20px 26px;">
+            <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}">
+              <p style="margin: 0 0 8px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 21px; color: #2E2419;">Lagoon &amp; Courts</p>
+              <p style="margin: 0; font-weight: 300; font-size: 12px; line-height: 1.8; color: rgba(46,36,25,0.65);">Water and play at the innermost, most sheltered zone.</p>
+            </sc-if>
+            <sc-if value="{{ ar }}">
+              <p style="margin: 0 0 8px; font-family: 'Noto Naskh Arabic', serif; font-size: 19px; color: #2E2419;">البحيرة والملاعب</p>
+              <p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 13px; line-height: 1.95; color: rgba(46,36,25,0.65);">الماء واللعب في أكثر المناطق داخليةً وحماية.</p>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Mood Board" style="padding: clamp(90px, 13vh, 170px) clamp(20px, 6vw, 80px) clamp(110px, 16vh, 200px); background: #EEE1CC;">
+    <div style="max-width: 1180px; margin: 0 auto;">
+      <div data-reveal="1" style="margin-bottom: clamp(40px, 6vw, 70px);">
+        <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}"><p style="margin: 0; font-size: 10px; letter-spacing: 0.34em; text-transform: uppercase; color: #7A5A3C;">Material &amp; Detail</p><p style="margin: 20px 0 0; max-width: 48ch; font-weight: 300; font-size: 13.5px; line-height: 1.9; color: rgba(46,36,25,0.68);">Earthen stucco, stepped parapets, incised triangles and warm concealed light &mdash; the palette every surface of the estate is drawn from.</p></sc-if>
+        <sc-if value="{{ ar }}"><p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; letter-spacing: 0.16em; color: #7A5A3C;">المادة والتفصيل</p><p style="margin: 20px 0 0; max-width: 48ch; font-family: 'Noto Naskh Arabic', serif; font-size: 14px; line-height: 2; color: rgba(46,36,25,0.68);">طين مُلبّس، وشرفات متدرّجة، ومثلّثات محفورة، وضوء دافئ مخفي &mdash; لوحة المواد التي تُشتق منها كل أسطح الضيعة.</p></sc-if>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(20px, 3vw, 40px);">
+        <figure data-reveal="2" style="margin: 0;">
+          <div style="overflow: hidden; border: 1px solid rgba(122,90,60,0.28);">
+            <img src="uploads/md-parapet.jpg" alt="Stepped parapet crown" style="display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 1600ms cubic-bezier(0.16,1,0.3,1), filter 1200ms ease;" style-hover="transform: scale(1.03);" />
+          </div>
+          <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}"><figcaption style="margin-top: 14px; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(46,36,25,0.5);">stepped parapet</figcaption></sc-if>
+          <sc-if value="{{ ar }}"><figcaption style="margin-top: 14px; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; color: rgba(46,36,25,0.55);">شرفات متدرّجة</figcaption></sc-if>
+        </figure>
+        <figure data-reveal="3" style="margin: 0;">
+          <div style="overflow: hidden; border: 1px solid rgba(122,90,60,0.28);">
+            <img src="uploads/md-mashrabiya.jpg" alt="Timber lattice screen" style="display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 1600ms cubic-bezier(0.16,1,0.3,1), filter 1200ms ease;" style-hover="transform: scale(1.03);" />
+          </div>
+          <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}"><figcaption style="margin-top: 14px; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(46,36,25,0.5);">timber screen</figcaption></sc-if>
+          <sc-if value="{{ ar }}"><figcaption style="margin-top: 14px; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; color: rgba(46,36,25,0.55);">مشربية خشبية</figcaption></sc-if>
+        </figure>
+        <figure data-reveal="4" style="margin: 0;">
+          <div style="overflow: hidden; border: 1px solid rgba(122,90,60,0.28);">
+            <img src="uploads/md-slot-light.jpg" alt="Vertical light slot" style="display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 1600ms cubic-bezier(0.16,1,0.3,1), filter 1200ms ease;" style-hover="transform: scale(1.03);" />
+          </div>
+          <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}"><figcaption style="margin-top: 14px; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(46,36,25,0.5);">light slot</figcaption></sc-if>
+          <sc-if value="{{ ar }}"><figcaption style="margin-top: 14px; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; color: rgba(46,36,25,0.55);">شق ضوئي</figcaption></sc-if>
+        </figure>
+        <figure data-reveal="5" style="margin: 0;">
+          <div style="overflow: hidden; border: 1px solid rgba(122,90,60,0.28);">
+            <img src="uploads/md-triangles.jpg" alt="Incised triangle openings" style="display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 1600ms cubic-bezier(0.16,1,0.3,1), filter 1200ms ease;" style-hover="transform: scale(1.03);" />
+          </div>
+          <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}"><figcaption style="margin-top: 14px; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(46,36,25,0.5);">incised triangles</figcaption></sc-if>
+          <sc-if value="{{ ar }}"><figcaption style="margin-top: 14px; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; color: rgba(46,36,25,0.55);">مثلّثات محفورة</figcaption></sc-if>
+        </figure>
+        <figure data-reveal="6" style="margin: 0;">
+          <div style="overflow: hidden; border: 1px solid rgba(122,90,60,0.28);">
+            <img src="uploads/md-screen.jpg" alt="Triangular perforated screen" style="display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 1600ms cubic-bezier(0.16,1,0.3,1), filter 1200ms ease;" style-hover="transform: scale(1.03);" />
+          </div>
+          <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}"><figcaption style="margin-top: 14px; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(46,36,25,0.5);">triangular perforation</figcaption></sc-if>
+          <sc-if value="{{ ar }}"><figcaption style="margin-top: 14px; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; color: rgba(46,36,25,0.55);">تخريم مثلّث</figcaption></sc-if>
+        </figure>
+        <figure data-reveal="7" style="margin: 0;">
+          <div style="overflow: hidden; border: 1px solid rgba(122,90,60,0.28);">
+            <img src="uploads/md-spout.jpg" alt="Projecting timber spout" style="display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 1600ms cubic-bezier(0.16,1,0.3,1), filter 1200ms ease;" style-hover="transform: scale(1.03);" />
+          </div>
+          <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}"><figcaption style="margin-top: 14px; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(46,36,25,0.5);">timber spout</figcaption></sc-if>
+          <sc-if value="{{ ar }}"><figcaption style="margin-top: 14px; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; color: rgba(46,36,25,0.55);">ميزاب خشبي</figcaption></sc-if>
+        </figure>
+        <figure data-reveal="8" style="margin: 0;">
+          <div style="overflow: hidden; border: 1px solid rgba(122,90,60,0.28);">
+            <img src="uploads/md-entry.jpg" alt="Lit entry threshold" style="display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 1600ms cubic-bezier(0.16,1,0.3,1), filter 1200ms ease;" style-hover="transform: scale(1.03);" />
+          </div>
+          <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}"><figcaption style="margin-top: 14px; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(46,36,25,0.5);">entry threshold</figcaption></sc-if>
+          <sc-if value="{{ ar }}"><figcaption style="margin-top: 14px; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; color: rgba(46,36,25,0.55);">عتبة الدخول</figcaption></sc-if>
+        </figure>
+        <figure data-reveal="9" style="margin: 0;">
+          <div style="overflow: hidden; border: 1px solid rgba(122,90,60,0.28);">
+            <img src="uploads/md-courtyard.jpg" alt="Planted desert courtyard" style="display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 1600ms cubic-bezier(0.16,1,0.3,1), filter 1200ms ease;" style-hover="transform: scale(1.03);" />
+          </div>
+          <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}"><figcaption style="margin-top: 14px; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(46,36,25,0.5);">planted courtyard</figcaption></sc-if>
+          <sc-if value="{{ ar }}"><figcaption style="margin-top: 14px; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; color: rgba(46,36,25,0.55);">فناء مزروع</figcaption></sc-if>
+        </figure>
+        <figure data-reveal="10" style="margin: 0;">
+          <div style="overflow: hidden; border: 1px solid rgba(122,90,60,0.28);">
+            <img src="uploads/md-niche.jpg" alt="Triangular wall niche" style="display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 1600ms cubic-bezier(0.16,1,0.3,1), filter 1200ms ease;" style-hover="transform: scale(1.03);" />
+          </div>
+          <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}"><figcaption style="margin-top: 14px; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(46,36,25,0.5);">wall niche</figcaption></sc-if>
+          <sc-if value="{{ ar }}"><figcaption style="margin-top: 14px; font-family: 'Noto Naskh Arabic', serif; font-size: 12px; color: rgba(46,36,25,0.55);">كوّة جدارية</figcaption></sc-if>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Closing" style="position: relative; padding: clamp(110px, 17vh, 200px) clamp(20px, 6vw, 80px) clamp(60px, 8vh, 90px); background: #D8C4A0;">
+    <div style="position: absolute; top: -1px; left: 0; right: 0; height: 9px; background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='9'%3E%3Cpath d='M0 8.6 L5.5 0.6 L11 8.6 L16.5 0.6 L22 8.6' fill='%23D8C4A0' stroke='%237A5A3C' stroke-width='0.8'/%3E%3C/svg%3E&quot;); background-repeat: repeat-x;"></div>
+    <div style="max-width: 1180px; margin: 0 auto;">
+      <div data-reveal="1" style="max-width: 34ch;">
+        <sc-if value="{{ en }}" hint-placeholder-val="{{ true }}">
+          <p style="margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; font-size: clamp(28px, 4.4vw, 60px); line-height: 1.28; color: #2E2419; text-wrap: pretty;">Land held quietly, built with intention.</p>
+        </sc-if>
+        <sc-if value="{{ ar }}">
+          <p style="margin: 0; font-family: 'Noto Naskh Arabic', serif; font-size: clamp(24px, 3.8vw, 48px); line-height: 1.7; color: #2E2419; text-wrap: pretty;">أرض تُصان بهدوء، وتُبنى بقصد.</p>
+        </sc-if>
+      </div>
+      <div data-reveal="2" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 36px; margin-top: clamp(56px, 9vw, 110px); padding-top: 24px; border-top: 1px solid rgba(122,90,60,0.45);">
+        <div style="display: flex; align-items: flex-start; gap: 16px;">
+          <img src="uploads/cec-logo.png" alt="CEC — Construction Excellence Center" style="display: block; height: 58px; width: auto; flex-shrink: 0;" />
+          <span style="max-width: 22ch; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(122,90,60,0.9); line-height: 1.8; padding-top: 4px;">{{ studioLine }}</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; font-weight: 300; font-size: 13px; line-height: 1.9; color: rgba(46,36,25,0.72);">
+          <span style="font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(122,90,60,0.9);">{{ contactLabel }}</span>
+          <a href="mailto:info@cec-consult.example">info@cec-consult.example</a>
+          <a href="tel:+966505233587">+966 50 523 3587</a>
+        </div>
+      </div>
+      <p data-reveal="3" style="margin: 44px 0 0; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(46,36,25,0.4);">North Ablaq Estate &middot; Buraydah, Al-Qassim &middot; 57,907 m&sup2;</p>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;ar&quot;],&quot;default&quot;:&quot;en&quot;,&quot;tsType&quot;:&quot;'en' | 'ar'&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  state = { lang: null };
+
+  get lang() { return this.state.lang || this.props.lang || 'en'; }
+
+  renderVals() {
+    const en = this.lang === 'en';
+    return {
+      en, ar: !en,
+      dir: en ? 'ltr' : 'rtl',
+      langLabel: en ? 'العربية' : 'English',
+      toggleLang: () => this.setState({ lang: en ? 'ar' : 'en' }),
+      scrollCue: en ? 'Scroll' : 'انزل',
+      labelArea: en ? 'Total Area' : 'المساحة الإجمالية',
+      labelFrontage: en ? 'Western Frontage' : 'الواجهة الغربية',
+      noteFrontage: en ? '20 m road' : 'طريق بعرض ٢٠ م',
+      labelLocation: en ? 'Location' : 'الموقع',
+      siteCopyLeft: en ? 'A single walled parcel, surveyed and fenced ahead of design — the ground from which every threshold is measured.' : 'قطعة واحدة مسوّرة، مُساحة ومحاطة بسياج قبل التصميم — الأرض التي تُقاس منها كل عتبة.',
+      siteCopyRight: en ? 'A 20 m municipal road along the western edge sets the estate\u2019s public frontage and its main approach.' : 'طريق بلدي بعرض ٢٠ م على الحافة الغربية يحدّد واجهة الضيعة العامة وطريق الوصول الرئيسي.',
+      valueLocation: en ? 'Buraydah — Al-Qassim' : 'بريدة — القصيم',
+      gradientNote: en ? 'public → private' : 'عام ← خاص',
+      capFinal: en ? 'final proposal' : 'المقترح النهائي',
+      capLand: en ? 'the land' : 'الأرض',
+      capContext: en ? 'agricultural context' : 'السياق الزراعي',
+      capApproach: en ? 'approach' : 'الطريق',
+      studioLine: en ? 'Construction Excellence Center for Engineering Consultations' : 'مركز التميز الإنشائي للاستشارات الهندسية',
+      contactLabel: en ? 'Contact' : 'التواصل'
+    };
+  }
+
+  componentDidMount() {
+    this.reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.setupReveals();
+    this.alive = true;
+    const loop = () => {
+      if (!this.alive) return;
+      this.tick();
+      this.raf = requestAnimationFrame(loop);
+    };
+    this.raf = requestAnimationFrame(loop);
+    this.onScroll = () => this.tick();
+    window.addEventListener('resize', this.onScroll, { passive: true });
+  }
+
+  componentDidUpdate() { this.setupReveals(); }
+
+  componentWillUnmount() {
+    this.alive = false;
+    window.removeEventListener('resize', this.onScroll);
+    if (this.io) this.io.disconnect();
+    if (this.raf) cancelAnimationFrame(this.raf);
+    clearTimeout(this.sweepT);
+    this.revealAll();
+  }
+
+  norm(v, a, b) { return Math.min(1, Math.max(0, (v - a) / (b - a))); }
+  smooth(t) { return t * t * (3 - 2 * t); }
+
+  tickSeq() {
+    const stage = document.querySelector('[data-seq-stage]');
+    if (!stage) return;
+    const r = stage.getBoundingClientRect();
+    const span = Math.max(1, stage.offsetHeight - window.innerHeight);
+    const p = Math.min(1, Math.max(0, -r.top / span));
+    const pin = document.querySelector('[data-seq-pin]');
+    if (pin) {
+      if (r.top > 0) { pin.style.position = 'absolute'; pin.style.top = '0'; }
+      else if (r.bottom < window.innerHeight) { pin.style.position = 'absolute'; pin.style.top = span + 'px'; }
+      else { pin.style.position = 'fixed'; pin.style.top = '0'; }
+    }
+    const n = 4, fade = 0.16;
+    const pos = this.reduceMotion ? Math.min(n - 0.001, Math.floor(p * n) + 0.5) : p * n;
+    for (let i = 0; i < n; i++) {
+      const d = pos - i;
+      let op;
+      if (d <= -fade) op = 0;
+      else if (d < 0) op = this.smooth((d + fade) / fade);
+      else if (d <= 1) op = 1;
+      else if (d < 1 + fade) op = 1 - this.smooth((d - 1) / fade);
+      else op = 0;
+      const img = document.querySelector('[data-seq-img="' + i + '"]');
+      if (img) img.style.opacity = op.toFixed(3);
+      const cap = document.querySelector('[data-seq-cap="' + i + '"]');
+      if (cap) {
+        cap.style.opacity = op.toFixed(3);
+        cap.style.transform = 'translateY(' + ((1 - op) * 14).toFixed(2) + 'px)';
+      }
+      const fill = document.querySelector('[data-seq-fill="' + i + '"]');
+      if (fill) fill.style.transform = 'scaleX(' + Math.min(1, Math.max(0, pos - i)).toFixed(3) + ')';
+    }
+  }
+
+  revealAll() {
+    document.querySelectorAll('[data-reveal]').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+  }
+
+  setupReveals() {
+    if (this.io) { this.io.disconnect(); this.io = null; }
+    const nodes = Array.from(document.querySelectorAll('[data-reveal]'));
+    nodes.forEach(el => {
+      const i = parseInt(el.getAttribute('data-reveal'), 10) || 1;
+      el.style.transition = 'opacity 1500ms cubic-bezier(0.16,1,0.3,1), transform 1500ms cubic-bezier(0.16,1,0.3,1)';
+      el.style.transitionDelay = Math.min(i - 1, 6) * 110 + 'ms';
+      el.style.willChange = 'opacity, transform';
+    });
+    const vh = window.innerHeight;
+    nodes.forEach(el => {
+      if (el.getBoundingClientRect().top > vh * 0.9) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(26px)';
+      } else {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      }
+    });
+    this.pending = nodes;
+    this.sweep();
+    clearTimeout(this.sweepT);
+    this.sweepT = setTimeout(() => this.sweep(), 600);
+  }
+
+  sweep() {
+    if (!this.pending || !this.pending.length) return;
+    const vh = window.innerHeight;
+    this.pending = this.pending.filter(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < vh * 0.9 && r.bottom > 0) {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+        return false;
+      }
+      return true;
+    });
+  }
+
+  tick() {
+    this.sweep();
+    this.tickSeq();
+    document.querySelectorAll('[data-parallax]').forEach(el => {
+      const amt = parseFloat(el.getAttribute('data-parallax')) || 0.05;
+      const r = el.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > window.innerHeight + 200) return;
+      const img = el.querySelector('img');
+      if (!img) return;
+      const c = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
+      img.style.transform = 'scale(1.08) translate3d(0,' + (-c * amt * 100).toFixed(2) + 'px,0)';
+    });
+  }
+}
+</script>
+</body>
+</html>
