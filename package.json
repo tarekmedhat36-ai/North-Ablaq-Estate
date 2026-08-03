@@ -1,0 +1,15 @@
+{
+  "name": "north-ablaq-estate",
+  "version": "1.0.0",
+  "description": "North Ablaq Estate project with Vercel Speed Insights",
+  "main": "index.html.html",
+  "scripts": {
+    "test": "echo \"No tests specified\""
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "^1.0.0"
+  },
+  "keywords": ["real-estate"],
+  "author": "",
+  "license": "ISC"
+}
